@@ -1,6 +1,3 @@
-
-
-
 class Tabla:
 
     def __init__ (self, nombre_tabla, conexion, atributos_tabla ):
@@ -38,13 +35,13 @@ class Tabla:
 
         if campo==None or valor==None:
             consulta= ("SELECT * "
-                      f"FROM {cls.nombre_tabla}")
+                        f"FROM {cls.nombre_tabla}")
             resultado= cls.__conectar(consulta)
         
         else:
             consulta=("SELECT * "
                       f"FROM {cls.nombre_tabla} "
-                      f"WHERE {campo} = %s")
+                        f"WHERE {campo} = %s")
             resultado=cls.__conectar(consulta, (valor,))
 
         return resultado
