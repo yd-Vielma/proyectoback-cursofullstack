@@ -1,12 +1,9 @@
-
-
-
 class Tabla:
 
-    def __init__ (self, nombre_tabla, conexion, atributos_tabla ):
+    def __init__ (self, nombre_tabla, conexion, atributos_tabla):
         self.nombre_tabla=nombre_tabla
         self.conexion=conexion
-        self.atributos_tabla= atributos_tabla
+        self.atributos_tabla=atributos_tabla
 
     
     def crear(self, valores,de_bbdd =False):
@@ -14,18 +11,18 @@ class Tabla:
             for c,v in zip(self.atributos_tabla,*valores):
                 setattr(self,c,v)
         else:
-            for c,v in zip(self.atributos_tabla[1:],valores):
+            for c,v in zip(self.atributos_tabla[1:], valores):
                 setattr(self,c,v)
         
 
 
     def guardar_db(self):
-        campos= str(self.atributos_tabla).replace("'","`")
-        valores= f"('%s ,'* {(len(self.atributos_tabla)-2)} %s)"
-        consulta= (f"INSERT INTO {self.nombre_tabla} {campos}"
+        campos = str(self.atributos_tabla).replace("'","`")
+        valores = f"('%s ,'* {(len(self.atributos_tabla)-2)} %s)"
+        consulta = (f"INSERT INTO {self.nombre_tabla} {campos}"
                     f"VALUES {valores};")
-        datos= tuple(vars(self).values())
-        rta_bd= self.__conectar(consulta,datos)
+        datos = tuple(vars(self).values())
+        rta_bd = self.__conectar(consulta,datos)
 
         if rta_bd:
             return 'Creacion exitosa'
