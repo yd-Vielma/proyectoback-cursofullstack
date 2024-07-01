@@ -1,7 +1,7 @@
 from flask import jsonify
 from flask import request
 
-from main import app
+from app import app
 from componentes.modelos import Comentario
 from componentes.modelos import Valoracion
 from componentes.modelos import Platillo
@@ -33,7 +33,8 @@ def api_valoracion():
         del dato["platillo_ID"]
 
     return jsonify(datos) 
-   
+
+
 #@app.route("/api-prueba_back/imagen", methods=['GET'])
 #def api_imagen():
     imagenes = Imagen.obtener()
@@ -46,7 +47,7 @@ def api_valoracion():
 
     return jsonify(datos)   
   
-  #POST
+#POST
 @app.route("/api-restaurant/comentario", methods=['POST'])
 def crear_coemtario():
 
