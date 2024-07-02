@@ -18,7 +18,7 @@ def api_platillo():
 @app.route("/api-restaurant/comentario", methods=['GET'])
 def api_cliente():
     comentarios = Comentario.obtener()
-    datos = [Comentario.__dict__ for comentario in comentarios]
+    datos = [comentario.__dict__ for comentario in comentarios]
 
     return jsonify(datos)
 
