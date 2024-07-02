@@ -91,7 +91,7 @@ class Tabla:
             cls.conexion.connect()
             cursor= cls.conexion.cursor()
         
-        if consulta.startswitch('SELECT'):
+        if consulta.startswith('SELECT'):
 
             if datos!= None:
                 cursor.execute(consulta,datos)
