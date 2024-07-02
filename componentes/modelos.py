@@ -16,7 +16,7 @@ class Valoracion(Tabla):
 
     nombre_tabla= 'valoracion'
     conexion=con
-    atributos_tabla=('ID_valoracion', 'platillo_ID', 'puntos')
+    atributos_tabla=('ID_valoracion', 'usuario_number','platillo_number', 'puntos')
 
     def __init__(self, *args, de_bbdd=False):
         super().crear(args, de_bbdd)
@@ -26,8 +26,17 @@ class Platillo(Tabla):
 
     nombre_tabla='platillo'
     conexion=con
-    atributos_tabla=('platillo_ID', 'plato', 'descripcion','precio')
+    atributos_tabla=('platillo_ID','imagen_id', 'plato', 'descripcion','precio')
 
     def __init__(self, *args, de_bbdd=False):
         super().crear(args, de_bbdd)
 
+
+class Imagen(Tabla):
+
+    nombre_tabla='imagen'
+    conexion=con
+    atributos_tabla=('Id_imagen','url', 'texto_alternativo')
+
+    def __init__(self, *args, de_bbdd=False):
+        super().crear(args, de_bbdd)

@@ -5,7 +5,7 @@ config_dev = {
     'user': 'root', 
     'password': '',
     'host': '127.0.0.1',
-    'database':'restaurant'
+    'database':'restaurante'
 }
 
 config_prod = {} # cuando entendamos jajaja

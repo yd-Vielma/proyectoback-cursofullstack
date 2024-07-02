@@ -5,6 +5,7 @@ from app import app
 from componentes.modelos import Comentario
 from componentes.modelos import Valoracion
 from componentes.modelos import Platillo
+from componentes.modelos import Imagen
 
 
 #GET
@@ -26,24 +27,25 @@ def api_cliente():
 def api_valoracion():
     valoraciones = Valoracion.obtener()
     datos = [valoracion.__dict__ for valoracion in valoraciones]
+    
+    #falta por revisar este for
+    #for dato in datos:
+        #dato["platillo"] = Valoracion.obtener('id', dato['platillo_ID']).__dict__["platillo"]
 
-    for dato in datos:
-        dato["platillo"] = Platillo.obtener('id', dato['platillo_ID']).__dict__["platillo"]
-
-        del dato["platillo_ID"]
+        #del dato["platillo_ID"]
 
     return jsonify(datos) 
 
 
-#@app.route("/api-prueba_back/imagen", methods=['GET'])
-#def api_imagen():
+@app.route("/api-prueba_back/imagen", methods=['GET'])
+def api_imagen():
     imagenes = Imagen.obtener()
     datos = [imagen.__dict__ for imagen in imagenes]
 
-    for dato in datos:
-        dato["platillo"] = Platillo.obtener('id', dato['platillo_id']).__dict__["platillo"]
+    #for dato in datos:
+        #dato["platillo"] = Platillo.obtener('id', dato['platillo_id']).__dict__["platillo"]
 
-        del dato["platillo_id"] 
+        #del dato["platillo_id"] 
 
     return jsonify(datos)   
   
