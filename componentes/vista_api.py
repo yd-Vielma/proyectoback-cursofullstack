@@ -41,7 +41,7 @@ def api_valoracion():
       #  del dato["platillo_ID"]
        # del dato["ID_comentario"]
 
-    #return jsonify(datos) 
+    return jsonify(datos) 
 
 
 @app.route("/api-restaurante/imagen", methods=['GET'])
