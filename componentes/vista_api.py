@@ -124,7 +124,15 @@ def eliminar_platillo(id):
         flash(f'Error al eliminar el platillo: {str(e)}')
     return redirect(url_for('platillo'))    
 
-
+@app.route('/eliminar_platillo/<int:id>', methods=['POST'])
+def eliminar_platillo(id):
+    try:
+        Platillo.eliminar_de_tabla(id)
+        flash('Platillo eliminado exitosamente.')
+    except Exception as e:
+        print(f'Error al eliminar el platillo: {str(e)}')  # Añadir esto para obtener más detalles en los registros del servidor
+        flash(f'Error al eliminar el platillo: {str(e)}')
+    return redirect(url_for('platillo'))
     
 if __name__ == '__main__':
     app.run(debug=True)
