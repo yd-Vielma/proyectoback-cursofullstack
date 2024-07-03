@@ -21,7 +21,8 @@
                     <td>{{ platillo.descripcion }}</td>
                     <td>{{ platillo.precio }}</td>
                     <td>
-                        <a class="btn-accion btn-eliminar" href="{{ url_for('eliminar_platillo', id=platillo.platillo_ID) }}" >Eliminar</a>
+                         <form action="{{ url_for('eliminar_platillo', id=platillo.platillo_ID) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn-accion btn-eliminar">Eliminar</button>
                     </td>
                 </tr>
                 {% endfor %}
