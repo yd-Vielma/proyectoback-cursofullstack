@@ -33,15 +33,15 @@ def api_valoracion():
     valoraciones = Valoracion.obtener()
     datos = [valoracion.__dict__ for valoracion in valoraciones]
     
-    #falta por revisar este for
-    for dato in datos:
-        dato["platillo"] = Valoracion.obtener('id', dato['platillo_ID']).__dict__["platillo"]
-        dato["comentario"] = Valoracion.obtener('id', dato['ID_comentario'])
+    
+   # for dato in datos:
+    #    dato["platillo"] = Valoracion.obtener('id', dato['platillo_ID']).__dict__["platillo"]
+     #   dato["comentario"] = Valoracion.obtener('id', dato['ID_comentario'])
 
-        del dato["platillo_ID"]
-        del dato["ID_comentario"]
+      #  del dato["platillo_ID"]
+       # del dato["ID_comentario"]
 
-    return jsonify(datos) 
+    #return jsonify(datos) 
 
 
 @app.route("/api-restaurante/imagen", methods=['GET'])
@@ -106,20 +106,6 @@ def crear_valoracion():
         respuesta['status'] = 204
 
     return jsonify(respuesta)
-
-
-
-@app.route('/modificar_platillo/<int:id>', methods=['GET', 'POST'])
-def modificar_platillo(id):
-    platillos = Platillo.modificar(id)  # Implementa esta función para obtener un platillo por su ID
-    if request.method == 'POST':
-             nombre = request.form['nombre']
-             descripcion = request.form['descripcion']
-             precio = request.form['precio']
-             update_platillo(id, nombre, descripcion, precio)  # Implementa esta función para actualizar un platillo en la base de datos
-             flash('Platillo modificado exitosamente.')
-             return redirect(url_for('platillos'))
-    return render_template('modificar_platillo.html', platillo=platillo)
 
 
 @app.route('/eliminar_platillo/<int:id>')

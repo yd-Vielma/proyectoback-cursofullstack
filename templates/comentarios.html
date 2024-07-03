@@ -1,36 +1,58 @@
+
 {% extends 'base.html' %}
 {% block contenido %}
-<h1>Comentarios y Valoraciones</h1>
-
-<h2>Comentarios</h2>
-<table id="tabla-comentarios">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Correo Electrónico</th>
-            <th>Comentario</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Contenido generado por JavaScript -->
-    </tbody>
-</table>
-
-<h2>Valoraciones</h2>
-<table id="tabla-valoraciones">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Platillo</th>
-            <th>Puntos</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Contenido generado por JavaScript -->
-          
-   
-    </tbody>
-</table>
+<div class="content">
+    <div class="articulos unaColumna">
+        <article>
+            <h3>Listado de Comentarios</h3>
+            <table id="tabla-comentarios">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Correo Electrónico</th>
+                        <th>Comentario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comentario in comentarios %}
+                    <tr>
+                        <td>{{ comentario.ID_comentario }}</td>
+                        <td>{{ comentario.nombre }}</td>
+                        <td>{{ comentario.apellido }}</td>
+                        <td>{{ comentario.correo_electronico }}</td>
+                        <td>{{ comentario.comentario }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </article>
+    </div>
+</div>
+<div class="content">
+    <div class="articulos unaColumna">
+        <article>
+            <h3>Listado de Valoraciones</h3>
+            <table id="tabla-valoraciones">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Platillo</th>
+                        <th>Puntos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for valoracion in valoraciones %}
+                    <tr>
+                        <td>{{ valoracion.ID_valoracion }}</td>
+                        <td>{{ valoracion.platillo }}</td>
+                        <td>{{ valoracion.puntos }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </article>
+    </div>
+</div>
 {% endblock contenido %}

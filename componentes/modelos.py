@@ -9,7 +9,12 @@ class Comentario(Tabla):
     atributos_tabla=('ID_comentario','nombre','Apellido','Correo_electronico', 'Comentario')
 
     def __init__(self, *args, de_bbdd=False):
-        super().crear(args, de_bbdd)
+        super().__init__(*args, de_bbdd=de_bbdd)
+
+    @classmethod
+    def obtener(cls):
+        consulta = "SELECT * FROM comentarios"
+        return cls.__conectar(consulta)    
 
 
 class Valoracion(Tabla):
@@ -19,7 +24,12 @@ class Valoracion(Tabla):
     atributos_tabla=('ID_valoracion', 'usuario_number','platillo_number', 'puntos')
 
     def __init__(self, *args, de_bbdd=False):
-        super().crear(args, de_bbdd)
+        super().__init__(*args, de_bbdd=de_bbdd)
+
+    @classmethod
+    def obtener(cls):
+        consulta = "SELECT * FROM valoracion"
+        return cls.__conectar(consulta)
     
 
 class Platillo(Tabla):
@@ -29,7 +39,12 @@ class Platillo(Tabla):
     atributos_tabla=('platillo_ID','imagen_id', 'plato', 'descripcion','precio')
 
     def __init__(self, *args, de_bbdd=False):
-        super().crear(args, de_bbdd)
+        super().__init__(*args, de_bbdd=de_bbdd)
+
+    @classmethod
+    def obtener(cls):
+        consulta = "SELECT * FROM platillo"
+        return cls.__conectar(consulta)
 
 
 class Imagen(Tabla):

@@ -60,27 +60,33 @@ class Tabla:
     
     @classmethod
     def modificar(cls, registro):
-        up= f"UPDATE {cls.nombre_tabla} "
-        st= 'SET'
-
-        id=registro.pop('id')
-        id= int(id) if type(id) != int else id
-
-        for j in list(registro.keys()):
-            st=f' {st} = %s,'
+        if 'id' not in registro:
+            raise ValueError("El registro debe contener un campo 'id'")
         
-        st= st[0:-1]
-        where_i= f" WHERE id = %s;"
-        consulta= up + st + where_i
-        nv_datos= *list(registro.values()), id
-        rta_bd= cls.__conectar(consulta, nv_datos)
+        id = registro.pop('id')
+        id = int(id) if not isinstance(id, int) else id
+
+        up = f"UPDATE {cls.nombre_tabla} "
+        st = 'SET'
+
+        # Construir la parte SET de la consulta SQL
+        set_parts = []
+        values = []
+        for key, value in registro.items():
+            set_parts.append(f"{key} = %s")
+            values.append(value)
+
+        st = ', '.join(set_parts)
+        where_i = " WHERE id = %s;"
+        consulta = up + st + where_i
+        values.append(id)
+
+        rta_bd = cls.__conectar(consulta, values)
 
         if rta_bd:
-            return 'Modificacion exitosa'
+            return 'Modificación exitosa'
         
         return 'No se puede modificar el registro.'
-
-
 
     @classmethod 
     def __conectar(cls,consulta,datos=None):
