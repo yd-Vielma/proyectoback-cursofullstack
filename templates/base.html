@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Sabores</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <!-- Título o logo -->
+        <div class="title">
+            <a href="{{ url_for('home') }}">Administración Tipo de Sabores</a>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('platillo') }}">Nuestro Menu</a></li>
+                <li><a href="{{ url_for('comentarios') }}">Comentarios</a></li>
+            </ul>
+        </nav>
+    </header>
+    <section id="contenidoSPA">
+        <!-- Contenido dinámico -->
+        {% block contenido %}
+        <div>
+        <h1 class="texto-centrado">Bienvenidos al Sistema de Gestiion del restaurante Tipo de sabores!</h1>
+        </div>
+        {% endblock contenido %}
+    </section>
+    <script src="../static/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+    <div class="content">
+        <h2 class="title">Administración Tipo de Sabores</h2>
+        <div class="articulos unaColumna">
+            <article>
+                <h3>Listado de Platillos</h3>
+                <table id="tabla-platillos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for platillo in platillos %}
+                        <tr>
+                            <td>{{ platillo.platillo_ID }}</td>
+                            <td>{{ platillo.nombre }}</td>
+                            <td>{{ platillo.descripcion }}</td>
+                            <td>{{ platillo.precio }}</td>
+                            <td>
+                                <a href="{{ url_for('editar_platillo', id=platillo.platillo_ID) }}" class="btn-accion btn-editar">Editar</a>
+                                <a href="{{ url_for('eliminar_platillo', id=platillo.platillo_ID) }}" class="btn-accion btn-eliminar">Eliminar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </article>
+        </div>
+    </div>
+{% endblock contenido %}
+

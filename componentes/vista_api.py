@@ -1,5 +1,9 @@
 from flask import jsonify
 from flask import request
+from flask import redirect
+from flask import url_for
+from flask import render_template
+from flask import flash
 
 from app import app
 from componentes.modelos import Comentario
@@ -9,49 +13,46 @@ from componentes.modelos import Imagen
 
 
 #GET
-@app.route("/api-restaurant/platillo", methods=['GET'])
+@app.route("/api-restaurante/platillo", methods=['GET'])
 def api_platillo():
     platillos = Platillo.obtener()
     datos = [platillo.__dict__ for platillo in platillos]
 
     return jsonify(datos)
 
-@app.route("/api-restaurant/comentario", methods=['GET'])
-def api_cliente():
+
+@app.route("/api-restaurante/comentario", methods=['GET'])
+def api_comentario():
     comentarios = Comentario.obtener()
     datos = [comentario.__dict__ for comentario in comentarios]
 
     return jsonify(datos)
 
-@app.route("/api-restaurant/valoracion", methods=['GET'])
+@app.route("/api-restaurante/valoracion", methods=['GET'])
 def api_valoracion():
     valoraciones = Valoracion.obtener()
     datos = [valoracion.__dict__ for valoracion in valoraciones]
     
     #falta por revisar este for
-    #for dato in datos:
-        #dato["platillo"] = Valoracion.obtener('id', dato['platillo_ID']).__dict__["platillo"]
+    for dato in datos:
+        dato["platillo"] = Valoracion.obtener('id', dato['platillo_ID']).__dict__["platillo"]
+        dato["comentario"] = Valoracion.obtener('id', dato['ID_comentario'])
 
-        #del dato["platillo_ID"]
+        del dato["platillo_ID"]
+        del dato["ID_comentario"]
 
     return jsonify(datos) 
 
 
-@app.route("/api-prueba_back/imagen", methods=['GET'])
+@app.route("/api-restaurante/imagen", methods=['GET'])
 def api_imagen():
     imagenes = Imagen.obtener()
     datos = [imagen.__dict__ for imagen in imagenes]
-
-    #for dato in datos:
-        #dato["platillo"] = Platillo.obtener('id', dato['platillo_id']).__dict__["platillo"]
-
-        #del dato["platillo_id"] 
-
     return jsonify(datos)   
   
 #POST
-@app.route("/api-restaurant/comentario", methods=['POST'])
-def crear_coemtario():
+@app.route("/api-restaurante/comentario", methods=['POST'])
+def crear_comentario():
 
     if request.method == 'POST':
         datos = request.json["datos"]
@@ -79,7 +80,7 @@ def crear_coemtario():
 
     return jsonify(respuesta)
 
-@app.route("/api-restaurant/valoracion", methods=['POST'])
+@app.route("/api-restaurante/valoracion", methods=['POST'])
 def crear_valoracion():
 
     if request.method == 'POST':
@@ -105,4 +106,27 @@ def crear_valoracion():
         respuesta['status'] = 204
 
     return jsonify(respuesta)
+
+
+
+@app.route('/modificar_platillo/<int:id>', methods=['GET', 'POST'])
+def modificar_platillo(id):
+    platillos = Platillo.modificar(id)  # Implementa esta función para obtener un platillo por su ID
+    if request.method == 'POST':
+             nombre = request.form['nombre']
+             descripcion = request.form['descripcion']
+             precio = request.form['precio']
+             update_platillo(id, nombre, descripcion, precio)  # Implementa esta función para actualizar un platillo en la base de datos
+             flash('Platillo modificado exitosamente.')
+             return redirect(url_for('platillos'))
+    return render_template('modificar_platillo.html', platillo=platillo)
+
+
+@app.route('/eliminar_platillo/<int:id>')
+def eliminar_platillo(id):
+  # Implementa esta función para eliminar un platillo de la base de datos
+    flash('Platillo eliminado exitosamente.')
+    return redirect(url_for('platillos'))
+
+
     
