@@ -59,8 +59,8 @@ class Tabla:
     
     @classmethod
     def eliminar_de_tabla(cls,id):
-        objecto_a_eliminar = cls.obtener(id)
-        consulta_eliminar = f"DELETE FROM {cls.tabla} WHERE id=%s"
+        #objecto_a_eliminar = cls.obtener(id)
+        consulta_eliminar = f"DELETE FROM {cls.tabla} WHERE platillo_id=%s"
         parametros_consulta = (id,)
         try:
             cursor = cls.conexion.cursor()

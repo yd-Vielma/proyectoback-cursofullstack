@@ -108,7 +108,7 @@ def crear_valoracion():
     return jsonify(respuesta)
 
 
-@app.route('/eliminar_platillo/<int:id>', methods = ['GET'])
+@app.route('/eliminar_platillo/<int:id>', methods = ['POST'])
 def eliminar_platillo(id):
   # Implementa esta función para eliminar un platillo de la base de datos
     if request.method == 'GET':
