@@ -108,12 +108,24 @@ def crear_valoracion():
     return jsonify(respuesta)
 
 
-@app.route('/eliminar_platillo/<int:id>', methods = ['POST'])
-def eliminar_platillo(id):
+#@app.route('/eliminar_platillo/<int:id>', methods = ['POST'])
+#def eliminar_platillo(id):
   # Implementa esta función para eliminar un platillo de la base de datos
-    if request.method == 'GET':
+ #   if request.method == 'GET':
+  #      Platillo.eliminar_de_tabla(id)
+ #       return redirect(url_for('platillos'))
+    
+@app.route('/eliminar_platillo/<int:id>', methods=['POST'])
+def eliminar_platillo(id):
+    try:
         Platillo.eliminar_de_tabla(id)
-        return redirect(url_for('platillos'))
+        flash('Platillo eliminado exitosamente.')
+    except Exception as e:
+        flash(f'Error al eliminar el platillo: {str(e)}')
+    return redirect(url_for('platillo'))    
 
 
     
+if __name__ == '__main__':
+    app.run(debug=True)
+

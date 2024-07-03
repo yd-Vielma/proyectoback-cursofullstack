@@ -60,18 +60,17 @@ class Tabla:
     @classmethod
     def eliminar_de_tabla(cls,id):
         #objecto_a_eliminar = cls.obtener(id)
-        consulta_eliminar = f"DELETE FROM {cls.tabla} WHERE platillo_id=%s"
+        consulta_eliminar = f"DELETE FROM {cls.nombre_tabla} WHERE platillo_id=%s"
         parametros_consulta = (id,)
         try:
             cursor = cls.conexion.cursor()
+            cursor.execute(consulta_eliminar, parametros_consulta)
+            cls.conexion.commit()
+            cls.conexion.close()
+            print("Objeto borrado")       
         except Exception as e:
-            cls.conexion.connect()
-            cursor = cls.conexion.connect 
-
-        cursor.execute(consulta_eliminar, parametros_consulta)
-        cls.conexion.commit()
-        cls.conexion.close()
-        print("Objeto borrado")       
+            print(f"Error al eliminar el objeto: {str(e)}")
+            raise      
     
     
     @classmethod
