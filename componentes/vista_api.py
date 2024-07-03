@@ -108,11 +108,12 @@ def crear_valoracion():
     return jsonify(respuesta)
 
 
-@app.route('/eliminar_platillo/<int:id>')
+@app.route('/eliminar_platillo/<int:id>', methods = ['GET'])
 def eliminar_platillo(id):
   # Implementa esta función para eliminar un platillo de la base de datos
-    flash('Platillo eliminado exitosamente.')
-    return redirect(url_for('platillos'))
+    if request.method == 'GET':
+        Platillo.eliminar_de_tabla(id)
+        return redirect(url_for('platillos'))
 
 
     
