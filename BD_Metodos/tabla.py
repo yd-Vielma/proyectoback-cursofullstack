@@ -47,18 +47,18 @@ class Tabla:
         return resultado
 
 
-    @classmethod
-    def eliminar(cls,id):
-        consulta= (f"DELETE FROM {cls.nombre_tabla} WHERE id = %s ;")
-        rta_bd= cls.__conectar(consulta, (id,))
+   # @classmethod
+    #def eliminar(cls,id):
+     #   consulta= (f"DELETE FROM {cls.nombre_tabla} WHERE id = %s ;")
+     #   rta_bd= cls.__conectar(consulta, (id,))
 
-        if rta_bd:
-            return 'Eliminacion exitosa'
+      #  if rta_bd:
+       #     return 'Eliminacion exitosa'
         
-        return 'No se puede eliminar el registro'
+        #return 'No se puede eliminar el registro'
     
     @classmethod
-    def eliminar(cls,id):
+    def eliminar_de_tabla(cls,id):
         objecto_a_eliminar = cls.obtener(id)
         consulta_eliminar = f"DELETE FROM {cls.tabla} WHERE id=%s"
         parametros_consulta = (id,)
