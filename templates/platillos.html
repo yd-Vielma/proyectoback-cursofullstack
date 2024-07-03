@@ -21,7 +21,7 @@
                     <td>{{ platillo.descripcion }}</td>
                     <td>{{ platillo.precio }}</td>
                     <td>
-                        <a href="{{ url_for('eliminar_platillo', id=platillo.platillo_ID) }}" class="btn-accion btn-eliminar">Eliminar</a>
+                        <a class="btn-accion btn-eliminar" href="{{ url_for('eliminar_platillo', id=platillo.platillo_ID) }}" >Eliminar</a>
                     </td>
                 </tr>
                 {% endfor %}
