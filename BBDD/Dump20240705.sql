@@ -78,7 +78,7 @@ CREATE TABLE `platillo` (
   `platillo_id` int(11) NOT NULL AUTO_INCREMENT,
   `imagen_id` int(2) DEFAULT NULL,
   `plato` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(1000) DEFAULT NULL,
+  `descripcion` varchar(2500) DEFAULT NULL,
   `precio` int(50) DEFAULT NULL,
   PRIMARY KEY (`platillo_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -133,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-05 16:41:01
+-- Dump completed on 2024-07-05 19:45:24
