@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `comentarios`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comentarios` (
-  `ID_comentario` int(11) NOT NULL AUTO_INCREMENT,
+  `id_comentario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) DEFAULT NULL,
-  `Apellido` varchar(50) DEFAULT NULL,
-  `Correo_electronico` varchar(100) DEFAULT NULL,
-  `Comentario` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`ID_comentario`)
+  `apellido` varchar(50) DEFAULT NULL,
+  `correo_electronico` varchar(100) DEFAULT NULL,
+  `comentario` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_comentario`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,10 +50,10 @@ DROP TABLE IF EXISTS `imagen`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `imagen` (
-  `Id_imagen` int(11) NOT NULL AUTO_INCREMENT,
+  `id_imagen` int(11) NOT NULL AUTO_INCREMENT,
   `url` varchar(60) DEFAULT NULL,
   `texto_alternativo` varchar(60) DEFAULT NULL,
-  PRIMARY KEY (`Id_imagen`)
+  PRIMARY KEY (`id_imagen`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -75,14 +75,12 @@ DROP TABLE IF EXISTS `platillo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `platillo` (
-  `platillo_ID` int(11) NOT NULL AUTO_INCREMENT,
-  `imagen_id` int(4) DEFAULT NULL,
+  `platillo_id` int(11) NOT NULL AUTO_INCREMENT,
+  `imagen_id` int(2) DEFAULT NULL,
   `plato` varchar(50) DEFAULT NULL,
-  `descripcion` varchar(150) DEFAULT NULL,
+  `descripcion` varchar(1000) DEFAULT NULL,
   `precio` int(50) DEFAULT NULL,
-  PRIMARY KEY (`platillo_ID`),
-  KEY `imagen_id` (`imagen_id`),
-  CONSTRAINT `platillo_ibfk_1` FOREIGN KEY (`imagen_id`) REFERENCES `imagen` (`Id_imagen`)
+  PRIMARY KEY (`platillo_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -104,16 +102,16 @@ DROP TABLE IF EXISTS `valoracion`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `valoracion` (
-  `ID_valoracion` int(11) NOT NULL AUTO_INCREMENT,
+  `id_valoracion` int(11) NOT NULL AUTO_INCREMENT,
   `usuario_number` int(11) DEFAULT NULL,
   `platillo_number` int(11) DEFAULT NULL,
   `puntos` varchar(10) DEFAULT NULL,
-  PRIMARY KEY (`ID_valoracion`),
+  PRIMARY KEY (`id_valoracion`),
   KEY `platillo_number` (`platillo_number`),
   KEY `usuario_number` (`usuario_number`),
   CONSTRAINT `valoracion_ibfk_1` FOREIGN KEY (`platillo_number`) REFERENCES `platillo` (`platillo_ID`),
-  CONSTRAINT `valoracion_ibfk_2` FOREIGN KEY (`usuario_number`) REFERENCES `comentarios` (`ID_comentario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  CONSTRAINT `valoracion_ibfk_2` FOREIGN KEY (`usuario_number`) REFERENCES `comentarios` (`id_comentario`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +120,7 @@ CREATE TABLE `valoracion` (
 
 LOCK TABLES `valoracion` WRITE;
 /*!40000 ALTER TABLE `valoracion` DISABLE KEYS */;
-INSERT INTO `valoracion` VALUES (1,1,1,'2');
+INSERT INTO `valoracion` VALUES (2,1,1,'2'),(3,1,1,'2'),(4,2,2,'44');
 /*!40000 ALTER TABLE `valoracion` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -135,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-02 19:15:12
+-- Dump completed on 2024-07-05 16:41:01

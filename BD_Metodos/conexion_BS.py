@@ -8,7 +8,7 @@ config_dev = {
     'database':'restaurante'
 }
 
-config_prod = {} # cuando entendamos jajaja
+config_prod = {} # en el python anywhere
 
 conexion = mysql.connector.connect(**config_dev)
 
