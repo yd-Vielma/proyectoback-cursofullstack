@@ -39,12 +39,12 @@ class Platillo(Tabla):
     atributos_tabla=('platillo_ID','imagen_id', 'plato', 'descripcion','precio')
 
     def __init__(self, *args, de_bbdd=False):
-        super().__init__(*args, de_bbdd=de_bbdd)
-
-    @classmethod
-    def obtener(cls):
-        consulta = "SELECT * FROM platillo"
-        return cls.__conectar(consulta)
+        super().__init__(self.atributos_tabla)
+        self.crear(args, de_bbdd)
+   # @classmethod
+    #def obtener(cls):
+     #   consulta = "SELECT * FROM platillo"
+      #  return cls.__conectar(consulta)
 
 
 class Imagen(Tabla):
@@ -55,3 +55,5 @@ class Imagen(Tabla):
 
     def __init__(self, *args, de_bbdd=False):
         super().crear(args, de_bbdd)
+
+

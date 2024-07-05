@@ -4,6 +4,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 app.json.ensure_ascii = False
+app.secret_key = 'ntra_clave_secreta'
 
 cors = CORS(app, resources={r"/api-restaurant/*": {"origins": "*"}})
 
