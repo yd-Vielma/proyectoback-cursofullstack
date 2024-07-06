@@ -122,7 +122,7 @@ def modificar_platillo(id):
     if request.method == 'POST':
         registro = {
             'id': id,
-            'nombre': request.form['nombre'],
+            'plato': request.form['plato'],
             'descripcion': request.form['descripcion'],
             'precio': request.form['precio']
         }
@@ -132,8 +132,6 @@ def modificar_platillo(id):
 
     # Obtener datos del platillo a modificar
     platillo = Platillo.obtener('platillo_id', id)
-    if platillo:
-        platillo = platillo[0]  # Obtenemos el primer (y único) resultado
     return render_template('modificar_platillo.html', platillo=platillo)
 
     

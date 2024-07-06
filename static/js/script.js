@@ -14,7 +14,7 @@ $(document).ready(function() {
                             <td>${platillo.descripcion}</td>
                             <td>${platillo.precio}</td>
                             <td>
-                                <button class="editar-platillo" data-id="${platillo.platillo_id}">Editar</button>
+                                <button class="btn-accion btn-editar" data-id="${platillo.platillo_id}">Editar</button>
                                 <button class="btn-accion btn-eliminar" data-id="${platillo.platillo_id}">Eliminar</button>
                             </td>
                         </tr>

@@ -91,7 +91,7 @@ class Tabla:
             values.append(value)
 
         st = ', '.join(set_parts)
-        where_i = " WHERE id = %s;"
+        where_i = " WHERE platillo_id = %s;"
         consulta = up + st + where_i
         values.append(id)
 
