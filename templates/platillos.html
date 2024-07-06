@@ -17,11 +17,14 @@
                 {% for platillo in platillos %}
                 <tr>
                     <td>{{ platillo.platillo_ID }}</td>
-                    <td>{{ platillo.nombre }}</td>
+                    <td>{{ platillo.plato }}</td>
                     <td>{{ platillo.descripcion }}</td>
                     <td>{{ platillo.precio }}</td>
                     <td>
-                        <a class="btn-accion btn-eliminar" href="{{ url_for('eliminar_platillo', id=platillo.platillo_ID) }}" >Eliminar</a>
+                        <form action="{{ url_for('eliminar_platillo', id=platillo.platillo_ID) }}" method="POST" style="display:inline;">
+                            <button type="submit" class="btn-accion btn-eliminar">Eliminar</button>
+                        </form>
+                        <a class="btn-accion btn-editar" href="{{ url_for('modificar_platillo', id=platillo.platillo_ID) }}">Modificar</a>
                     </td>
                 </tr>
                 {% endfor %}
