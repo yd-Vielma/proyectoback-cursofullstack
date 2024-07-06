@@ -36,7 +36,7 @@ class Platillo(Tabla):
 
     nombre_tabla='platillo'
     conexion=con
-    atributos_tabla=('platillo_id','imagen_id', 'plato', 'descripcion','precio')
+    atributos_tabla=('platillo_id','imagen_id', 'plato', 'descripcion', 'precio')
 
     def __init__(self, *args, de_bbdd=False):
         super().__init__(self.atributos_tabla)

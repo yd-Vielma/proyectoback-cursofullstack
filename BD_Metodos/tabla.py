@@ -59,7 +59,7 @@ class Tabla:
     @classmethod
     def eliminar_de_tabla(cls,id):
         #objecto_a_eliminar = cls.obtener(id)
-        consulta_eliminar = f"DELETE FROM {cls.nombre_tabla} WHERE platillo_ID = %s; "
+        consulta_eliminar = f"DELETE FROM {cls.nombre_tabla} WHERE platillo_id = %s;"
         parametros_consulta = (id,)
         try:
             cursor = cls.conexion.cursor()
@@ -91,7 +91,7 @@ class Tabla:
             values.append(value)
 
         st = ', '.join(set_parts)
-        where_i = " WHERE platillo_ID = %s;"
+        where_i = " WHERE id = %s;"
         consulta = up + st + where_i
         values.append(id)
 

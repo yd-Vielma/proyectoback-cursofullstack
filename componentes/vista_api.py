@@ -86,7 +86,7 @@ def crear_valoracion():
     if request.method == 'POST':
         datos = request.json["datos"]
         nva_valoracion = Valoracion(
-            datos['platillo_ID'],
+            datos['platillo_id'],
             datos['puntos'],
         )
 
@@ -131,7 +131,7 @@ def modificar_platillo(id):
         return redirect(url_for('platillos'))
 
     # Obtener datos del platillo a modificar
-    platillo = Platillo.obtener('platillo_ID', id)
+    platillo = Platillo.obtener('platillo_id', id)
     if platillo:
         platillo = platillo[0]  # Obtenemos el primer (y único) resultado
     return render_template('modificar_platillo.html', platillo=platillo)
