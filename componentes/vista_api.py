@@ -86,7 +86,7 @@ def crear_valoracion():
     if request.method == 'POST':
         datos = request.json["datos"]
         nva_valoracion = Valoracion(
-            datos['platillo_ID'],
+            datos['platillo_id'],
             datos['puntos'],
         )
 
@@ -107,13 +107,6 @@ def crear_valoracion():
 
     return jsonify(respuesta)
 
-
-#@app.route('/eliminar_platillo/<int:id>', methods = ['POST'])
-#def eliminar_platillo(id):
-  # Implementa esta función para eliminar un platillo de la base de datos
- #   if request.method == 'GET':
-  #      Platillo.eliminar_de_tabla(id)
- #       return redirect(url_for('platillos'))
     
 @app.route('/eliminar_platillo/<int:id>', methods=['POST'])
 def eliminar_platillo(id):
@@ -122,8 +115,24 @@ def eliminar_platillo(id):
         flash('Platillo eliminado exitosamente.')
     except Exception as e:
         flash(f'Error al eliminar el platillo: {str(e)}')
-    return redirect(url_for('platillo'))    
+    return redirect(url_for('platillos'))    
 
+@app.route('/modificar_platillo/<int:id>', methods=['GET', 'POST'])
+def modificar_platillo(id):
+    if request.method == 'POST':
+        registro = {
+            'id': id,
+            'plato': request.form['plato'],
+            'descripcion': request.form['descripcion'],
+            'precio': request.form['precio']
+        }
+        mensaje = Platillo.modificar(registro)
+        flash(mensaje)
+        return redirect(url_for('platillos'))
+
+    # Obtener datos del platillo a modificar
+    platillo = Platillo.obtener('platillo_id', id)
+    return render_template('modificar_platillo.html', platillo=platillo)
 
     
 if __name__ == '__main__':

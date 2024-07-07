@@ -9,13 +9,13 @@ $(document).ready(function() {
                 data.forEach(function(platillo) {
                     $('#tabla-platillos tbody').append(`
                         <tr>
-                            <td>${platillo.platillo_ID}</td>
+                            <td>${platillo.platillo_id}</td>
                             <td>${platillo.plato}</td>
                             <td>${platillo.descripcion}</td>
                             <td>${platillo.precio}</td>
                             <td>
-                                <button class="editar-platillo" data-id="${platillo.platillo_ID}">Editar</button>
-                                <button class="eliminar-platillo" data-id="${platillo.platillo_ID}">Eliminar</button>
+                                <button class="btn-accion btn-editar" data-id="${platillo.platillo_id}">Editar</button>
+                                <button class="btn-accion btn-eliminar" data-id="${platillo.platillo_id}">Eliminar</button>
                             </td>
                         </tr>
                     `);
@@ -34,7 +34,7 @@ $(document).ready(function() {
                 data.forEach(function(comentario) {
                     $('#tabla-comentarios tbody').append(`
                         <tr>
-                            <td>${comentario.ID_comentario}</td>
+                            <td>${comentario.id_comentario}</td>
                             <td>${comentario.nombre}</td>
                             <td>${comentario.apellido}</td>
                             <td>${comentario.correo_electronico}</td>
@@ -56,7 +56,7 @@ $(document).ready(function() {
                 data.forEach(function(valoracion) {
                     $('#tabla-valoraciones tbody').append(`
                         <tr>
-                            <td>${valoracion.ID_valoracion}</td>
+                            <td>${valoracion.id_valoracion}</td>
                             <td>${valoracion.platillo}</td>
                             <td>${valoracion.puntos}</td>
                         </tr>

@@ -1,9 +1,9 @@
 class Tabla:
 
     def __init__ (self, nombre_tabla, conexion, atributos_tabla):
-        self.nombre_tabla=nombre_tabla
-        self.conexion=conexion
-        self.atributos_tabla=atributos_tabla
+        self.nombre_tabla = nombre_tabla
+        self.conexion = conexion
+        self.atributos_tabla = atributos_tabla
 
     
     def crear(self, valores,de_bbdd =False):
@@ -29,38 +29,43 @@ class Tabla:
         return 'No se pudo crear el registro'
     
     
-
     @classmethod
     def obtener(cls, campo=None, valor=None):
-
-        if campo==None or valor==None:
-            consulta= ("SELECT * "
-                        f"FROM {cls.nombre_tabla}")
-            resultado= cls.__conectar(consulta)
-        
+        if campo is None or valor is None:
+            consulta = f"SELECT * FROM {cls.nombre_tabla}"
+            resultado = cls.__conectar(consulta)
         else:
-            consulta=("SELECT * "
-                      f"FROM {cls.nombre_tabla} "
-                        f"WHERE {campo} = %s")
-            resultado=cls.__conectar(consulta, (valor,))
+            consulta = f"SELECT * FROM {cls.nombre_tabla} WHERE {campo} = %s"
+            resultado = cls.__conectar(consulta, (valor,))
 
         return resultado
 
-
    # @classmethod
-    #def eliminar(cls,id):
-     #   consulta= (f"DELETE FROM {cls.nombre_tabla} WHERE id = %s ;")
-     #   rta_bd= cls.__conectar(consulta, (id,))
+    #def obtener(cls, campo=None, valor=None):
 
-      #  if rta_bd:
-       #     return 'Eliminacion exitosa'
+     #   if campo==None or valor==None:
+      #      consulta= ("SELECT * "
+       #                 f"FROM {cls.nombre_tabla}")
+        #    resultado= cls.__conectar(consulta)
         
-        #return 'No se puede eliminar el registro'
+        #else:
+         #   consulta=("SELECT * "
+          #            f"FROM {cls.nombre_tabla} "
+           #             f"WHERE {campo} = %s")
+            #resultado=cls.__conectar(consulta, (valor,))
+
+        #return resultado
     
     @classmethod
     def eliminar_de_tabla(cls,id):
+        
+        # Eliminar primero los registros dependientes en la tabla 'valoracion'
+        consulta_eliminar_dependencias = f"DELETE FROM valoracion WHERE platillo_number = %s"
+        cls.__conectar(consulta_eliminar_dependencias, (id,))
+        
         #objecto_a_eliminar = cls.obtener(id)
-        consulta_eliminar = f"DELETE FROM {cls.nombre_tabla} WHERE platillo_id = %s; "
+        
+        consulta_eliminar = f"DELETE FROM {cls.nombre_tabla} WHERE platillo_id = %s;"
         parametros_consulta = (id,)
         try:
             cursor = cls.conexion.cursor()
@@ -92,7 +97,7 @@ class Tabla:
             values.append(value)
 
         st = ', '.join(set_parts)
-        where_i = " WHERE id = %s;"
+        where_i = " WHERE platillo_id = %s;"
         consulta = up + st + where_i
         values.append(id)
 
