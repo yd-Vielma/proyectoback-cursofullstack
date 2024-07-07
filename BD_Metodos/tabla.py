@@ -58,6 +58,11 @@ class Tabla:
     
     @classmethod
     def eliminar_de_tabla(cls,id):
+        
+        # Eliminar primero los registros dependientes en la tabla 'valoracion'
+        consulta_eliminar_dependencias = f"DELETE FROM valoracion WHERE platillo_number = %s"
+        cls.__conectar(consulta_eliminar_dependencias, (id,))
+        
         #objecto_a_eliminar = cls.obtener(id)
         consulta_eliminar = f"DELETE FROM {cls.nombre_tabla} WHERE platillo_id = %s;"
         parametros_consulta = (id,)
