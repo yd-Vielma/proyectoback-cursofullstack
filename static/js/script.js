@@ -84,7 +84,7 @@ $(document).ready(function() {
             url: '/api-restaurante/platillo',
             method: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ datos }),
+            data: JSON.stringify( datos ),
             success: function(respuesta) {
                 alert(respuesta.mensaje);
                 cargarPlatillos();
@@ -93,7 +93,7 @@ $(document).ready(function() {
     });
 
     // Manejar eliminación de platillo
-    $(document).on('click', '.eliminar-platillo', function() {
+    $(document).on('click', '.btn-platillo', function() {
         const id = $(this).data('id');
 
         $.ajax({

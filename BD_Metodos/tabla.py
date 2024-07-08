@@ -16,17 +16,36 @@ class Tabla:
         
 
 
-    def guardar_db(self):
-        campos = str(self.atributos_tabla).replace("'","`")
-        valores = f"('%s ,'* {(len(self.atributos_tabla)-2)} %s)"
-        consulta = (f"INSERT INTO {self.nombre_tabla} {campos}"
-                    f"VALUES {valores};")
-        datos = tuple(vars(self).values())
-        rta_bd = self.__conectar(consulta,datos)
+    # def guardar_db(self):
+    #     campos = str(self.atributos_tabla).replace("'","`")
+    #     valores = f"('%s ,'* {(len(self.atributos_tabla)-2)} %s)"
+    #     consulta = (f"INSERT INTO {self.nombre_tabla} {campos}"
+    #                 f"VALUES {valores};")
+    #     datos = tuple(vars(self).values())
+    #     rta_bd = self.__conectar(consulta,datos)
 
-        if rta_bd:
-            return 'Creacion exitosa'
+    #     if rta_bd:
+    #         return 'Creacion exitosa'
+    #     return 'No se pudo crear el registro'
+    
+    
+    
+    def guardar_db(self):
+        # Suponiendo que self.atributos_tabla es una lista o tupla de nombres de campos
+        campos = ', '.join([f"`{campo}`" for campo in self.atributos_tabla])
+        # Suponiendo que necesitas tantos placeholders como atributos hay
+        placeholders = ', '.join(['%s' for _ in self.atributos_tabla])
+        consulta = f"INSERT INTO {self.nombre_tabla} ({campos}) VALUES ({placeholders});"
+        # Suponiendo que vars(self) devuelve un diccionario con los valores a insertar
+        datos = tuple(vars(self).values())
+        try:
+            rta_bd = self.__conectar(consulta, datos)
+            if rta_bd:
+                return 'Creación exitosa'
+        except Exception as e:
+            print(f"Ocurrió un error: {e}")
         return 'No se pudo crear el registro'
+        
     
     
     @classmethod
@@ -56,20 +75,36 @@ class Tabla:
 
         #return resultado
     
+    # @classmethod
+    # def eliminar_de_tabla(cls,id):
+    #     #objecto_a_eliminar = cls.obtener(id)
+    #     consulta_eliminar = f"DELETE FROM {cls.nombre_tabla} WHERE platillo_id = %s;"
+    #     parametros_consulta = (id,)
+    #     try:
+    #         cursor = cls.conexion.cursor()
+    #         cursor.execute(consulta_eliminar, parametros_consulta)
+    #         cls.conexion.commit()
+    #         cls.conexion.close()
+    #         print("Objeto borrado")       
+    #     except Exception as e:
+    #         print(f"Error al eliminar el objeto: {str(e)}")
+    #         raise      
+    
+    
     @classmethod
-    def eliminar_de_tabla(cls,id):
-        #objecto_a_eliminar = cls.obtener(id)
+    def eliminar_de_tabla(cls, id):
         consulta_eliminar = f"DELETE FROM {cls.nombre_tabla} WHERE platillo_id = %s;"
         parametros_consulta = (id,)
         try:
             cursor = cls.conexion.cursor()
             cursor.execute(consulta_eliminar, parametros_consulta)
             cls.conexion.commit()
-            cls.conexion.close()
-            print("Objeto borrado")       
+            print("Objeto borrado")
         except Exception as e:
             print(f"Error al eliminar el objeto: {str(e)}")
-            raise      
+            # Aquí podrías decidir si quieres elevar la excepción o manejarla de otra manera
+
+    
     
     
     @classmethod
